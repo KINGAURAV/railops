@@ -1,0 +1,15 @@
+# Keep secrets and local artifacts out of container images.
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+env/
+**/__pycache__/
+**/*.py[cod]
+**/.ipynb_checkpoints/
+**/.DS_Store
+*.db
+mlruns/
+assets/
+08_deploy/image-signing/

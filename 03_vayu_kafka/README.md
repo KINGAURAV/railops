@@ -1,0 +1,57 @@
+# 📡 Step 3 — Vayu Kafka
+
+**RailOps** › **Vayu Kafka** · `03_vayu_kafka/`
+
+| [← Previous — Step 2 — Vayu MLflow](../02_vayu_mlflow/) | [Next — Step 4 — Starter Kit →](../04_starter-kit/) |
+|:---|---:|
+
+Deploy **Vayu Kafka** and create the two topics used by RailOps: `railway_telemetry` (sensor readings from the ingest API to the dashboard) and `railway_commands` (maintenance directives published by the dashboard). Kafka connection details are provided in the **Access Guide**.
+
+---
+
+<details>
+<summary><h3>🔗 Open Kafka</h3></summary>
+
+Go to [Vayu Kafka](https://ipcloud.tatacommunications.com/cloud/console/vks/#/ms/list/kafka) to deploy Kafka.
+
+</details>
+
+---
+
+<details>
+<summary><h3>📂 Folder contents</h3></summary>
+
+| File | Purpose |
+|------|---------|
+| `create_topic.py` | Creates the telemetry and command topics once Kafka is Ready |
+
+</details>
+
+---
+
+<details>
+<summary><h3>🚀 Quick start</h3></summary>
+
+1. **Deploy Vayu Kafka**
+
+   > **Skip this step** if Vayu Kafka has already been provided to you — continue with step 2 below.
+
+   - Create a new Kafka deployment on the [Vayu Kafka](https://ipcloud.tatacommunications.com/cloud/console/vks/#/ms/list/kafka) page.
+   - **Wait for Ready:** Submit the deployment and wait until the status shows **Ready**.
+
+2. **Create a topic:** Ensure your project root [`.env`](../README.md) includes `KAFKA_BROKER`, `KAFKA_USERNAME` and `KAFKA_PASSWORD` (optionally `KAFKA_TOPIC` and `KAFKA_COMMAND_TOPIC`) — use the **Access Guide** for credentials. Form `KAFKA_BROKER` as `<SERVER_IP>:<PORT>`. Then run:
+
+   ```bash
+   cd /home/jovyan/move-it
+   source /home/jovyan/.venv/bin/activate  # (skip if already activated)
+   python 03_vayu_kafka/create_topic.py
+   ```
+
+   [`create_topic.py`](create_topic.py) loads Kafka settings from `.env` and creates `KAFKA_TOPIC` (default `railway_telemetry`) and `KAFKA_COMMAND_TOPIC` (default `railway_commands`). Topics that already exist are skipped.
+
+</details>
+
+---
+
+| [← Previous — Step 2 — Vayu MLflow](../02_vayu_mlflow/) | [Overview](../README.md) | [Next — Step 4 — Starter Kit →](../04_starter-kit/) |
+|:---|:---:|---:|

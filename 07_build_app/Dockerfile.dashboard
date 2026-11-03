@@ -1,0 +1,25 @@
+# RailOps dashboard (Streamlit). Build from the repo root:
+#   docker build -f 07_build_app/Dockerfile.dashboard -t <registry>/<project>/move-it-dashboard:latest .
+FROM python:3.11-slim-bookworm
+
+WORKDIR /app
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# The built-in simulator replays this dataset.
+COPY 01_dataset/railway_telemetry.csv ./01_dataset/railway_telemetry.csv
+COPY 07_build_app/ ./07_build_app/
+
+WORKDIR /app/07_build_app
+
+EXPOSE 8501
+
+ENV STREAMLIT_SERVER_PORT=8501
+ENV STREAMLIT_SERVER_ADDRESS=0.0.0.0
+ENV STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
+
+CMD ["streamlit", "run", "app.py", "--server.address=0.0.0.0", "--server.port=8501"]

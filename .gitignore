@@ -1,0 +1,25 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Local MLflow / OS artifacts
+mlflow.db
+mlruns/
+.DS_Store
+
+# Vayu image signing
+.qdrant-initialized/
+meta.json
+tcl-cosign
+08_deploy/image-signing/fulcio.crt
+08_deploy/image-signing/rekor.key
+08_deploy/image-signing/ctlog.key
